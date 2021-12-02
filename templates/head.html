@@ -1,0 +1,21 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="Luckysidburn">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Comfortaa" />
+  <title>Opentrekkers</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ site_url }}/static/css/opentrekkers.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ site_url }}/static/appletouchicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ site_url }}/static/favicon3232.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ site_url }}/static/favicon1616.png">
+  <link rel="manifest" href="{{ site_url }}/static/site.webmanifest">
+  {% for itinerary in itineraries %}
+  {% if itinerary['status'] == "enabled" and itinerary['itinerary_id'] == itinerary_id %}
+  <meta property="og:title" content="{{ itinerary['name'] }}" />
+  <meta property="og:image" content="{{ itinerary['image'] }}" />
+  <meta property="og:description" content="{{ itinerary['short_description'] }}" />
+  {% endif %}
+  {% endfor %}
+</head>

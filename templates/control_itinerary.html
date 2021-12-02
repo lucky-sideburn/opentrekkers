@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  {% include 'head.html' %}
+  <body>
+    <div class="cover-container">
+      <header>
+        {% include 'navbar.html' %}
+      </header>
+    </div>
+    {% include 'modals.html' %}
+    <div class="container mt-5">
+      {% if session['username'] == "admin" %}
+        {% if itineraries | length > 0 %}
+      <table class="table table-striped table-light mt-5">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Author</th>
+            <th scope="col">Vouchers</th>
+            <th scope="col">Short Description</th>
+            <th scope="col">Status</th>
+            <th scope="col">-</th>
+            <th scope="col">-</th>
+            <th scope="col">-</th>
+            <th scope="col">-</th>
+            <th scope="col">-</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% endif %}
+        {% for itinerary in itineraries %}
+          <tr>
+            <form action="{{ site_url }}/itinerary/manage" method="POST">
+            <input name="name" type="hidden" class="form-control" id="name" value="{{ itinerary['name'] }}">
+            <td scope="row">{{loop.index}}</td>
+            <td>{{ itinerary['name'] }}</td>
+            <td>{{ itinerary['author'] }}</td>
+            <td>{{ itinerary['vouchers'] }}</td>
+            <td>{{ itinerary['short_description'] }}</td>
+            {% if itinerary["status"] == "enabled" %}
+            <td><div class="text-success">Attivo</div></td>
+            {% elif itinerary["status"] == "disabled" %}
+            <td><div class="text-danger">Non Attivo</div></td>
+            {% endif %}
+            <td><button type="submit" class="btn btn-light btn-sm" name="up" value="up" {% if itinerary["position"] == 1 %}disabled{% endif %}>Sposta su</button></td>
+            <td><button type="submit" class="btn btn-light btn-sm" name="down" value="down" {% if itinerary["position"] == last %}disabled{% endif %}>Sposta giù</button></td>
+            {% if itinerary["status"] == "disabled" %}
+            <td><button type="submit" class="btn btn-success btn-sm" name="enable" value="enable">Attiva</button></td>
+            {% elif itinerary["status"] == "enabled" %}
+            <td><button type="submit" class="btn btn-warning btn-sm" name="disable" value="disable">Disattiva</button></td>
+            {% endif %}
+            <td><button type="submit" class="btn btn-info btn-sm" name="modify" value="modify">Modifica</button></td>
+            <td><button type="submit" class="btn btn-danger btn-sm" name="delete" value="delete">Cancella</button></td>
+            </form>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+        {% if itineraries | length == 0 and not modify %}
+      <h2 class="mt-5">Non ci sono interari in Opentrekkers!</h2>
+        {% endif %}
+      {% endif %}
+    </div>
+    {% include 'footer.html' %}
+    {% include 'script.html' %}
+  </body>
+</html>

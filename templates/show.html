@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  {% include 'head.html' %}
+  <body class="text-center">
+    <div class="cover-container">
+      <header>
+        {% include 'navbar.html' %}
+      </header>
+    </div>
+    {% include 'modals.html' %}
+    <div class="container mt-5">
+      {% if true or session['username'] == "admin" %}
+      {% for itinerary in itineraries %}
+      {% if itinerary['status'] == "enabled" and itinerary['itinerary_id'] == itinerary_id %}
+      <div class="row justify-content-md-center">
+        <div class="card row row-margin-10 border-0" style="background-color: #f9f7f79b; width: 55rem; margin-left: 5%; margin-right: 5%;">
+          <img class="card-img-top" src="{{ itinerary['image']}}" alt="">
+          <div class="card-body">
+            <div class="container">      
+              <div class="row">
+                <div class="col">
+                  <p class="text-left">{% if itinerary['vouchers'] > 0 %}Voucher disponibili: <font color="#427A42">{{ itinerary['vouchers'] }}</font>{% endif %}</p> 
+                </div>
+                <div class="col">
+                  <p class="text-center">Livello: <font color="#427A42">{{ itinerary['level'] }}</font></p>
+                </div>
+                <div class="col">
+                  {% if itinerary['vouchers'] > 0 %}<p class="text-right">Scadenza: <font color="#427A42">{{ itinerary['expiry_date'] }}</font></p>{% endif %}
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col">
+                  <p class="text-left">Partite da: <font color="#427A42">{{ itinerary['starting_point'] }}</font></p> 
+                </div>
+                <div class="col">
+                  {% if itinerary['vouchers'] > 0 %}<p class="text-right">Per <font color="#427A42">{{ itinerary['partecipants'] }}</font> persone</p>{% endif %}
+                  {% if itinerary['vouchers'] == 0 %}<p class="text-right">Consigliato per <font color="#427A42">{{ itinerary['partecipants'] }}</font> persone</p>{% endif %}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <p class="card-title text-left">Autore: <font color="#427A42">{{ itinerary['author'] }}</font></p> 
+                </div>
+                <div class="col">
+                  <p class="card-title text-right">Durata: <font color="#427A42">{{ itinerary['duration'] }}</font> ore</p>
+                </div>
+              </div>  
+            </div>
+            <h2 class="text-center mt-5">{{ itinerary['name'] }}</h4>
+            <h4 class="text-left mt-5">Descrizione</h4>
+            <p class="mt-3 text-left">{{ itinerary['short_description'] }}</p>
+            <h4 class="text-left mt-5">Tappe</h4>
+            <div class="card mt-3">
+              <div class="card-body text-left" style="background-color: #fefefe;">
+                {{ itinerary['stages'] | safe }}
+              </div>
+            </div>
+
+            <h4 class="text-left mt-5">Equipaggiamento</h4>
+            <div class="row row-margin-10 text-left" style="background-color: #fefefe;;">
+              <div class="col">
+                {{ itinerary['equipment'] | safe }}
+              </div>
+            </div>
+            
+            {% if itinerary['vouchers'] > 0%}
+            <h4 class="text-left mt-5">Dove posso spendere il voucher?</h4>
+            {% if itinerary["voucher_type"] == "Guida Turistica" %}
+            <p class="mt-3 text-left">Hai un voucher spendibile con {{ itinerary['shop_name'] }} che sarà la vostra guida turistica dedicat!</p>
+            {% else %}
+            <p class="mt-3 text-left">Hai un voucher spendibile presso {{ itinerary['shop_name'] }} che si trova in {{ itinerary['shop_address'] }}</p>
+            {% endif %}
+            <h4 class="text-left mt-5">Cosa comprende il voucher?</h4>
+            <p class="mt-3 text-left">{{ itinerary['voucher_content'] }}</p>
+            <h4 class="mt-5 text-left">I nostri itinerari sono di dominio pubblico, ma se vuoi puoi ottenere un voucher per una guida o per qualcosa di mangereccio!</h4>
+            <p class="card-text mt-3 text-left">Noi di Opentrekkers non chiediamo nessuna registrazione, la mail ci occorre solamente per associarla al voucher che presenterai a {{ itinerary['shop_name'] }}. A proposito, ricordati di chiamare per essere sicuri che ci sia posto per {{ itinerary['partecipants'] }}</p>
+            <div class="row row-margin-10 justify-content-md-center">
+              <form method=POST action="{{ site_url }}/voucher/create">
+                <div class="form-group" align=center>
+                  <input type="text" class="form-control" name="itinerary_of_voucher" id="itinerary_of_voucher" value="{{  itinerary['name'] }}" hidden>
+                </div>
+                <div class="form-group" align=center>
+                  <label for="partecipant_email">Indirizzo e-mail</label>
+                  <input type="email" class="form-control w-50" name="partecipant_email" placeholder="luca.rossi@email.it" required>
+                </div>
+                <div class="form-group" align=center>
+                  <label for="partecipant_name">Nome</label>
+                  <input type="text" class="form-control w-50" name="partecipant_name" placeholder="Luca" minlength="1" maxlength="40" required>
+                </div>
+                <div class="form-group mt-5" align=center>
+                  <label for="get_voucher">Una volta ottenuto il voucher, riceverai da Opentrekkers una mail di conferma per attivarlo</label>
+                  <input type="submit" id="get_voucher" class="btn btn-secondary mt-2 border-light rounded-lg" value="Ottieni il voucher">
+                </div>
+              </form>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+    {% include 'footer.html' %}
+    {% include 'script.html' %}
+  </body>
+</html>

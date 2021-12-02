@@ -1,0 +1,13 @@
+Flask==1.1.1
+Flask-Admin==1.5.4
+Pillow==6.2.0
+pymongo==3.9.0
+qrcode==6.1
+flask_appbuilder
+flask_pymongo
+flask-avatars
+bcrypt
+markdown
+img2pdf
+essential_generators
+sendgrid

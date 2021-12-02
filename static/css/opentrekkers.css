@@ -1,0 +1,257 @@
+.custom-footer {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #969696;
+  color: white;
+  text-align: center;
+}
+
+/* change the brand and text color */
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: rgba(255,255,255,.8);
+}/* change the link color */
+
+.navbar-custom .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.757);
+}/* change the color of active or hovered links */
+
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom .nav-item:hover .nav-link {
+    color: #ffffff;
+}
+
+
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.blob {
+  border-radius: 50%;
+	background: rgb(0, 228, 69);
+	border-radius: 50%;
+	margin: 0px;
+	height: 12px;
+	width: 12px;
+	box-shadow: 0 0 0 0 rgb(4, 255, 37);
+	transform: scale(1);
+	animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+	0% {
+		transform: scale(1.0);
+		box-shadow: 0 0 0 0 rgba(56, 176, 5, 0.7);
+	}
+
+	70% {
+		transform: scale(0.9);
+		box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+	}
+
+	100% {
+		transform: scale(0.6);
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+	}
+}
+
+.alert-custom{
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+
+.border-10 {
+  border-width:10px !important;
+}
+
+.btn-primary
+{
+  display:block;
+  border-radius:0px;
+  box-shadow:0px 4px 6px 2px rgba(0,0,0,0.2);
+  margin-top:-5px;
+}
+
+.imgUp
+{
+  margin-bottom:15px;
+}
+
+.del
+{
+  position:absolute;
+  top:0px;
+  right:15px;
+  width:30px;
+  height:30px;
+  text-align:center;
+  line-height:30px;
+  background-color:rgba(255,255,255,0.6);
+  cursor:pointer;
+}
+
+.imgAdd
+{
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  background-color:#4bd7ef;
+  color:#fff;
+  box-shadow:0px 0px 2px 1px rgba(0,0,0,0.2);
+  text-align:center;
+  line-height:30px;
+  margin-top:0px;
+  cursor:pointer;
+  font-size:15px;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+  /* background-color: #7561a4ff; */
+  /* background-color: #278d8f; */
+  /* background-color: #d2a82b; */
+  border-radius: 0%;
+}
+
+.mt-30{
+  margin-top: 30 !important;
+}
+
+.mt-5 {
+  margin-top: 5 !important;
+}
+
+.mt-3 {
+  margin-top: 3 !important;
+}
+
+.md-3 {
+  margin-bottom: 3 !important;
+}
+
+optgroup { font-family: Comfortaa; }
+
+h1 { 
+  font-family: Comfortaa;
+  font-size: 32px; 
+  font-style: normal; 
+  font-variant: normal; 
+  font-weight: 700; 
+  line-height: 26.4px;
+  /*color: #ede5e5;*/
+} 
+
+
+h2 { 
+  font-family: Comfortaa; 
+  /* font-size: 24px;
+  font-style: normal; 
+  font-variant: normal; 
+  font-weight: 400; 
+  line-height: 20px; */
+  /*color: #ede5e5;*/
+} 
+
+h3 { 
+  font-family: Comfortaa; 
+  /* font-size: 18px; 
+  font-style: normal; 
+  font-variant: normal; 
+  font-weight: 700; 
+  line-height: 15.4px; 
+  color: #ede5e5; */
+} 
+
+h4 { 
+  font-family: Comfortaa; 
+} 
+
+h5 { 
+  font-family: Comfortaa; 
+  font-size: 14px;
+} 
+
+p { 
+  font-family: Comfortaa; 
+  font-size: 18px;
+  font-style: normal; 
+  font-variant: normal; 
+  font-weight: 400; 
+  line-height: 20px;
+  color: #1e1b1b;
+} 
+blockquote { 
+  font-family: Comfortaa; 
+  font-size: 21px; 
+  font-style: normal; 
+  font-variant: normal; 
+  font-weight: 400; 
+  line-height: 30px; 
+} 
+pre { 
+  font-family: Comfortaa; 
+  font-size: 13px; 
+  font-style: normal; 
+  font-variant: normal; 
+  font-weight: 400; 
+  line-height: 18.5667px; 
+}
+
+body {
+  font-family: Comfortaa;
+  /* height: auto; */
+  /* background-color: #7561a4ff; */
+  /* background-color: #0284D0; */
+  /* background-color: #0670adc4; */
+  /* background-color: #278d8f; */
+}
+
+.dot-red {
+  height: 20px;
+  width: 20px;
+  background-color: red;
+  border-radius: 20%;
+  display: inline-block;
+}
+
+.dot-blue {
+  height: 20px;
+  width: 20px;
+  background-color: blue;
+  border-radius: 20%;
+  display: inline-block;
+}
+
+.dot-black {
+  height: 20px;
+  width: 20px;
+  background-color: black;
+  border-radius: 20%;
+  display: inline-block;
+}
+
+.dot-green {
+  height: 20px;
+  width: 20px;
+  background-color: green;
+  border-radius: 20%;
+  display: inline-block;
+}
+
+.dot-orange {
+  height: 20px;
+  width: 20px;
+  background-color: orange;
+  border-radius: 20%;
+  display: inline-block;
+}
+
+.row-margin-05 { margin-top: 0.5em; }
+.row-margin-10 { margin-top: 1.0em; margin-bottom: 1.0em; }
+.row-margin-20 { margin-top: 2.0em; }
+.row-margin-30 { margin-top: 3.0em; }
+.row-margin-40 { margin-top: 4.0em; }
+.row-margin-50 { margin-top: 5.0em; }

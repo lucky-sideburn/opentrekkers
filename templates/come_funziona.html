@@ -1,0 +1,49 @@
+
+<!doctype html>
+<html lang="en">
+  {% include 'head.html' %}
+  <body>
+    <div class="cover-container">
+      <header>
+        {% include 'navbar.html' %}
+      </header>
+    </div>
+    <div class="container mt-5">
+      <!-- <div class="card">
+        <div class="card-body text-left"> -->
+      <div class="row">
+        <div class="card border-0">
+          <div class="card-body" style="background-color: #f9f7f79b;">
+            <p style="line-height: 150%" class="text-left">
+  Opentrekkers nasce come motore di ricerca per itinerari di prossimità urbani.<br><br>
+  All'interno del sito puoi trovare itinerari scritti dai nostri travel designer o proposti dalla community.<br>
+  Se hai un'attività, se sei una guida turistica o gestisci un museo proponici un voucher sconto da inserire all'interno di un itinerario.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 row-margin-50">
+          <h1 style="line-height: 100%">Trova itinerari che abbiano il link "Proponi un voucher"</h1>
+        </div>
+        <div class="col-6">
+          <img src="{{site_url}}/static/images/itinerary_whith_no_voucher.png" class="img-fluid row-margin-20" width="40%" height="40%">
+        </div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-6">
+          <img src="{{site_url}}/static/images/proposta_voucher.png" class="img-fluid row-margin-20" width="70%" height="70%">
+        </div>
+        <div class="col-6 row-margin-50">
+          <h1 style="line-height: 100%">Proponici un voucher da associare ad un itinerario</h1>
+        </div>
+      </div>
+      <hr/>
+        <!-- </div>
+      </div> -->
+    </div>
+    {% include 'footer.html' %}
+    {% include 'script.html' %}
+  </body>
+</html>

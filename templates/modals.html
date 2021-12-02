@@ -1,0 +1,150 @@
+<!-- Modal -->
+<div class="modal fade" id="VoucherModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel">Voucher mangereccio</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row justify-content-md-center">
+            <div class="col-md-9 col-md-offset-4">
+              <form method=POST action="{{ site_url }}/voucher/create">
+                <div class="form-group">
+                  <label for="itinerary_of_voucher">Nome Itinerario</label>
+                  <input type="text" class="form-control" name="itinerary_of_voucher" id="itinerary_of_voucher" minlength="1" maxlength="30" readonly>
+                </div>
+                <div class="form-group">
+                  <label for="partecipant_email">Indirizzo e-mail</label>
+                  <input type="email" class="form-control" name="partecipant_email" placeholder="luca.rossi@email.it" required>
+                </div>
+                <div class="form-group">
+                  <label for="partecipant_name">Nome</label>
+                  <input type="text" class="form-control" name="partecipant_name" placeholder="Luca" minlength="1" maxlength="40" required>
+                </div>
+                <div class="form-group text-left mt-5">
+                  <h5>Una volta ottenuto il voucher riceverai da Opentrekkers una mail di conferma per attivarlo</h5>
+                </div>
+                <div class="form-group mt-5">
+                  <input type="submit" class="btn btn-primary btn-sm border-0" data-toggle="modal" value="Ottieni il voucher">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="ProposalModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel">Proponici un voucher</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <form method=POST action="{{ site_url }}/voucher_proposal/create">
+            <div class="form-group">
+              <input type="text" class="form-control" name="itineray_of_proposal" id="itineray_of_proposal" minlength="1" maxlength="30" hidden>
+            </div>
+            <div class="form-group">
+              <label for="partecipant_email">Il tuo indirizzo e-mail</label>
+              <input type="email" class="form-control" name="shop_email" placeholder="luca.rossi@email.it" required>
+            </div>
+            <div class="form-group">
+              <label for="partecipant_name">Descrivici la tua attività</label>
+              <textarea class="form-control" name="shop_description" minlength="1" maxlength="500" spellcheck="false" required></textarea>
+            </div>
+            <div class="form-group text-left mt-5">
+              <h5>Inserici nella descrizione più informazioni possibili per aiutarci a capire come associare il tuo voucher all'itinerario</h5>
+            </div>
+            <div class="row justify-content-center">
+              <input type="submit" class="btn btn-primary mt-2 border-light rounded-lg" data-toggle="modal" value="Invia">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel">Login</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-md-9 col-md-offset-4">
+              <form method=POST action="{{ url_for('login') }}">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Username</label>
+                  <input type="text" class="form-control" name="username" placeholder="Username">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input type="password" class="form-control" name="pass" placeholder="Password">
+                </div>
+                <div class="row justify-content-center mt-5">
+                  <button type="submit" class="btn btn-primary btn-block btn rounded-lg">Log In</button>
+                </div>
+              </form>
+              <br>
+              <!-- <div>
+                Don't have an account? <a onclick="closeLoginModal()" class="nav-link" data-toggle="modal" data-target="#registerModal" href="/#">Sign up here</a>.
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel">Sign In</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-9 col-md-offset-4">
+              <form method=POST action="{{ url_for('register') }}">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Utente</label>
+                  <input type="text" class="form-control" name="username" placeholder="Username">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input type="password" class="form-control" name="pass" placeholder="Password">
+                </div>
+                  <button type="submit" class="btn btn-primary btn-block">Registrati</button>
+                </form>
+                <br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

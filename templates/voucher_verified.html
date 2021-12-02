@@ -1,0 +1,43 @@
+
+<!doctype html>
+<html lang="en">
+  {% include 'head.html' %}
+  <body class="text-center">
+    <div class="cover-container">
+      <header>
+        {% include 'navbar.html' %}
+      </header>
+    </div> 
+    <div class="container mt-5 text-left" style="margin-left: 2%; margin-right: 2%;">
+      {% if voucher_authenticated %}
+        {% if already_verified %}
+      <div class="row row-margin-50 text-left">
+        <h2 style="color: #6f6f6f;">Ciao {{ itinerary['shop_name']}} hai già attivato questo voucher!</h2>
+      </div>
+        {% else %}
+      <div class="row row-margin-50 text-left">
+        <h2 style="color: #6f6f6f;">Ciao {{ itinerary['shop_name']}} hai attivato un voucher con le seguenti specifiche:</h2>
+      </div>
+        {% endif %}
+      <div class="row row-margin-50 text-left">
+        <h2 style="color: #6f6f6f;">Itinerario: {{ voucher['itinerary_name']}}</h2>
+      </div>
+      <div class="row row-margin-10 text-left">
+        <h2 style="color: #6f6f6f;">Beneficiario: {{ voucher['beneficiary']}}</h2>
+      </div>
+      <div class="row row-margin-10 text-left">
+        <h2 style="color: #6f6f6f;">Email di {{ voucher['beneficiary']}}: {{ voucher['beneficiary_email']}}</h2>
+      </div>
+      <div class="row row-margin-10 text-left">
+        <h2 style="color: #6f6f6f;">Contenuto del voucher: {{ itinerary['voucher_content']}}</h2>
+      </div>
+      {% else %}
+      <div class="row row-margin-10 text-left">
+        <h2 style="color: #6f6f6f;">Gentile utente, l'accesso non è consentito. Contattaci per avere supporto!</h2>
+      </div>
+      {% endif %}
+    </div>
+    {% include 'footer.html' %}
+    {% include 'script.html' %}
+  </body>
+</html>

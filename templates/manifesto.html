@@ -1,0 +1,51 @@
+
+<!doctype html>
+<html lang="en">
+  {% include 'head.html' %}
+  <body class="text-center">
+    <div class="cover-container">
+      <header>
+        {% include 'navbar.html' %}
+      </header>
+    </div>
+    <div class="container mt-5">
+      <!-- <div class="card"> -->
+        <!-- <div class="card-body text-left"> -->
+          <div class="row text-center justify-content-center">
+          <h1 style="color: #5e5e5e;" class="text-left">
+Perchè abbiamo creato Opentrekkers.it<br><br>
+          </h1>
+          </div>
+          <div class="row" style="margin-bottom: 4%;">
+            <div class="col-6 row-margin-50">
+              <h1 style="line-height: 100%">Per creare un luogo dove trovare spunti e consigli su itinerari di prossimità</h1>
+            </div>
+            <div class="col-6">
+              <img src="{{site_url}}/static/images/community.png" class="img-fluid row-margin-20 rounded" width="70%" height="70%">
+            </div>
+          </div>
+          <hr/>
+          <div class="row" style="margin-bottom: 4%;">
+            <div class="col-6">
+              <img src="{{site_url}}/static/images/space.png" class="img-fluid rounded row-margin-20" width="70%" height="70%">
+            </div>
+            <div class="col-6 row-margin-50">
+              <h1 style="line-height: 100%">Nel nostro piccolo (molto piccolo) per far ripartire l'economia</h1>
+            </div>
+          </div>
+          <hr/>
+          <div class="row" style="margin-bottom: 4%;">
+            <div class="col-6 row-margin-50" style="margin-bottom: 20%;">
+              <h1 style="line-height: 100%">Cercare di far ripartire il turismo senza andare troppo lontano</h1>
+            </div>
+            <div class="col-6">
+              <img src="{{site_url}}/static/images/map.png" class="img-fluid rounded row-margin-20" width="70%" height="70%">
+            </div>
+          </div>
+        <!-- </div> -->
+    <!-- </div> -->
+    </div>
+    {% include 'footer.html' %}
+    {% include 'script.html' %}
+  </body>
+</html>

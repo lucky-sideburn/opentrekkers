@@ -1,0 +1,97 @@
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+  
+  function closeLoginModal() {
+    $('#loginModal').modal('hide');
+  }
+
+  $(document).ready(function(){
+    setTimeout(
+      function() {
+      $("#alert_message").hide();
+    }, 5000);
+
+    // $("#show_search").click(function(){
+    //   $(".search_form").show();
+    //   $("#show_search").hide();
+    //   $("#hide_search").show();
+    // });
+
+    // $("#hide_search").click(function(){
+    //   $(".search_form").hide();
+    //   $("#show_search").show();
+    //   $("#hide_search").hide();
+    // });
+
+    $(".suggest_voucher").click(function(){
+      $('#itineray_of_proposal').val(this.id);
+      $('#ProposalModal').modal('show');
+    });
+  
+    $("#google_maps_link").click(function(){
+      window.open(this.name, 'google_maps_link');
+    });
+
+    $("#confirm_itinerary").click(function(){
+      if ($( "#voucher_type option:selected" ).text() == "Nessuno"){
+        $("#vouchers_group_1").remove();
+        $("#vouchers_group_2").remove();
+        $("#vouchers_group_3").remove();
+        $("#vouchers_group_4").remove();
+        $("#vouchers_group_5").remove();
+        $("#vouchers_group_6").remove();
+        $("#vouchers_group_7").remove();
+        $("#suggest_voucher").remove();
+     }
+    });
+
+    if ($( "#voucher_type option:selected" ).text() == "Nessuno"){
+      $(".voucher_group").hide();
+      $("#suggest_voucher").hide();
+      $("#suggest_partiecipant_count").show();
+     }
+
+    $("#voucher_type").click(function(){
+      if ($( "#voucher_type option:selected" ).text() == "Nessuno"){
+        $(".voucher_group").hide();
+        $("#suggest_voucher").hide();
+        $("#suggest_partiecipant_count").show();
+      }
+      else {
+        $(".voucher_group").show();
+        $("#suggest_voucher").show();
+        $("#suggest_partiecipant_count").hide();
+      }
+    });
+
+  });
+  
+  $(document).on("click", ".browse", function() {
+    var file = $(this).parents().find(".file");
+    file.trigger("click");
+  });
+
+  $('input[type="file"]').change(function(e) {
+    var fileName = e.target.files[0].name;
+
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      // get loaded data and render thumbnail.
+      document.getElementById("preview").src = e.target.result;
+    };
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+  });
+
+  $(document).on("click", ".open-modal", function () {
+    $('#itinerary_of_voucher').val('dasdas')
+    $('#itinerary_of_voucher').val('dasdas')
+    $('#VoucherModal').modal('show');
+  });
+
+
+
+</script>

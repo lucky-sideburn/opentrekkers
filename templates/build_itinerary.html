@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+  {% include 'head.html' %}
+  <body>
+    <div class="cover-container">
+      <header>
+        {% include 'navbar.html' %}
+      </header>
+    </div>
+    {% include 'modals.html' %}
+    <div class="container mt-5">
+      {% if true or session['username'] == "admin" %}
+      <div class="row row-margin-10 justify-content-md-center" style="margin-left: 2%; margin-right: 2%;">
+        <div class="card row" style="width: 55rem; background-color: #f9f7f79b">
+          <div class="card-header text-center">
+            {% if session['username'] == "admin" %}
+            <h2><font color=black>Progetta il tuo itinerario</font></h3>
+            {% else %}
+            <h2><font color=black>Inviaci il tuo itinerario</font></h3>
+            {% endif %}
+          </div>          
+          <form action="{{ site_url }}/itinerary/create" method="POST" class="needs-validation"  enctype="multipart/form-data"> 
+            <div class="card-body">
+              <div class="container"> 
+                <div class="row justify-content-md-center">     
+                  <div class="form-group text-center" align="center">
+                    <label for="name">Nome dell'itinerario</label>                        
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Roma Underground #1" {% if modify %} value="{{ itinerary['name'] }}" {% endif %} required>
+                  </div>
+                </div>   
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group text-center" align="left">
+                      <label for="name">Tipo di voucher<small> (inserire Nessuno in caso di mancaza di una voucher)</small></label>                        
+                      <select class="custom-select mr-sm-2" name="voucher_type" id="voucher_type" required>
+                        <optgroup>
+                          {% if modify %} <option selected>{{ itinerary['voucher_type'] }}</option> {% endif %}
+                          <option value="Guida Turistica">Guida Turistica</option>
+                          <option value="Ristorante">Ristorante</option>
+                          <option value="Museo">Museo</option>
+                          <option value="Caffetteria">Caffetteria</option>
+                          <option value="Aperitivo">Aperitivo</option>
+                          <option value="Nessuno">Nessuno</option>
+                        </optgroup>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group voucher_group" align="center" id="vouchers_group_1">
+                      <label for="vouchers">Voucher Disponibili <small>(inserire 0 se non si hanno voucher da inserire)</small></label>                        
+                      <input type="number" class="form-control  w-25" id="vouchers" name="vouchers" placeholder="0"  min="0" max="100" {% if modify %} value="{{ itinerary['vouchers'] }}" {% endif %} required>
+                    </div>
+                  </div>
+                </div>     
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group text-center" align="center">
+                      <label for="name">Livello</label>                        
+                      <select class="custom-select mr-sm-2" name="level" id="level" required>
+                        <optgroup>
+                          {% if modify %} <option selected>{{ itinerary['level'] }}</option> {% endif %}
+                          <option value="Facile">Facile</option>
+                          <option value="Intermedio">Intermedio</option>
+                          <option value="Difficile">Difficile</option>
+                          <option value="Esperto">Esperto</option>
+                        </optgroup>
+                      </select>
+                    </div> 
+                  </div>
+                  <div class="col">
+                    <div class="form-group voucher_group" id="vouchers_group_7" align=center>
+                      <label for="expiry_date">Scadenza</label>                        
+                      <input type="date" class="form-control" id="expiry_date" name="expiry_date" placeholder="1"  {% if modify %} value="{{ itinerary['expiry_date'] }}" {% endif %} required>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="starting_point">Partite da</label>                        
+                      <input type="text" class="form-control" id="starting_point" name="starting_point" placeholder="Stazione Termini" {% if modify %} value="{{ itinerary['starting_point'] }}" {% endif %} required>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group" align=center>
+                      <label for="partecipants">Numero <label for="partecipants" id="suggest_partiecipant_count"> consigliato </label> di partecipanti </label><label for="partecipants" id="suggest_voucher">al voucher</label>                        
+                      <input type="number" class="form-control w-25" id="partecipants" name="partecipants" placeholder="8"  min="1" max="10" {% if modify %} value="{{ itinerary['partecipants'] }}" {% endif %} required> 
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+
+                    {% if session['username'] == "admin" %}
+                    <div class="form-group">
+                      <label for="author">Autore</label>                        
+                      <input type="text" class="form-control" id="author" name="author" placeholder="Opentrekker" {% if modify %} value="{{ itinerary['author'] }}" {% endif %} required>
+                    </div>
+                    {% else %}
+                    <div class="form-group">
+                      <label for="author">Il tuo indirizzo email</label>                        
+                      <input type="email" class="form-control" id="author" name="author" placeholder="luca.rossi@opentrekkers.it" {% if modify %} value="{{ itinerary['author'] }}" {% endif %} required>
+                    </div> 
+                    {% endif %}
+                  </div>
+                  <div class="col">
+                    <div class="form-group" align=center>
+                      <label for="duration">Durata (ore)</label>                        
+                      <input type="number" class="form-control w-25" id="duration" name="duration" placeholder="1" min="1" max="24" {% if modify %} value="{{ itinerary['duration'] }}" {% endif %} required>
+                    </div>    
+                  </div>
+                </div>  
+              </div>
+              
+              <div class="row">
+                <div class="container">
+                  <div class="form-group">
+                    <label for="short_description">Descrizione Breve</label>                        
+                    <input type="text" class="form-control" id="short_description" name="short_description" placeholder="Un super passeggiatona nelle centro di Roma" {% if modify %} value="{{ itinerary['short_description'] }}" {% endif %} required>
+                  </div>
+                  <div class="form-group">
+                    <label for="short_description">Link Google Maps</label>                        
+                    <input type="text" class="form-control" id="google_maps" name="google_maps" placeholder="" {% if modify %} value="{{ itinerary['google_maps'] }}" {% endif %} required>
+                  </div>
+                  <div class="form-group">
+                    <label for="stages">Descrivi le tappe dell'itinerario<br>Usa il linguaggio di markup Markdown, ecco un esempio:</label>
+                    <textarea class="form-control" id="stages" name="stages" rows="15" placeholder="## Visita Parcolo della Caffarella
+Descrizione dell'itinerario..
+<br/>
+## Pausa panino da Mario
+Descrizione della sosta da Mario...
+<br/>
+## Visita al museo
+Descrizione della visita al museo..
+
+Per inserire link:
+[link to Google!](http://google.com)
+
+" required>{% if modify %}{{ itinerary['stages_markdown'] }}{% endif %}</textarea>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  <div class="form-group voucher_group" align="center" id="vouchers_group_2">
+                    <label for="shop_name">Con chi usare posso usare il voucher?</label>                        
+                    <input type="text" class="form-control" id="shop_name" name="shop_name" placeholder="Da Tonino" {% if modify %} value="{{ itinerary['shop_name'] }}" {% endif %} required>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group voucher_group" align=center id="vouchers_group_3">
+                    <label for="shop_address">Indirizzo Voucher <small>(in caso di esercizio commerciale insierisci indirizzo, in caso di guida lascia pure vuto)</small></label>                        
+                    <input type="text" class="form-control" id="shop_address" name="shop_address" placeholder="Via Suricata 1000, 00177 Roma" {% if modify %} value="{{ itinerary['shop_name'] }}" {% endif %} >
+                  </div>
+                </div>
+              </div> 
+
+              <div class="row">
+                <div class="col">
+                  <div class="form-group voucher_group" align="center" id="vouchers_group_4">
+                    <label for="shop_email">Email Voucher <small>(contatto email della guida o dell'esercizio commerciale)</small></label>                        
+                    <input type="email" class="form-control" id="shop_email" name="shop_email" placeholder="tonino@yahoo.it" {% if modify %} value="{{ itinerary['shop_email'] }}" {% endif %} required>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group voucher_group" align=center  id="vouchers_group_5">
+                    <label for="shop_telephone_number">Contatto Telefonico Voucher <small>(contatto telefonico della guida o dell'esercizio commerciale)</small></label>                        
+                    <input type="text" class="form-control" id="shop_telephone_number" name="shop_telephone_number" placeholder="+39 3333383338" {% if modify %} value="{{ itinerary['shop_telephone_number'] }}" {% endif %} required>
+                  </div>
+                </div>
+              </div> 
+
+              <div class="row">
+                <div class="container">         
+                  <div class="form-group voucher_group" id="vouchers_group_6">
+                    <label for="voucher_content">Cosa comprende il voucher?</label>
+                    <textarea class="form-control" id="voucher_content" name="voucher_content" rows="1" maxlength="100" placeholder="Sconto del 50% sulla carbonara" required>{% if modify %} {{ itinerary['voucher_content'] }} {% endif %}</textarea>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="container">         
+                  <div class="form-group">
+                    <label for="equipment">Elenca l'equipaggiamento<br>Usa il linguaggio di markup Markdown, ecco un esempio:</label>
+                    <textarea class="form-control" id="equipment" name="equipment" rows="10" placeholder="* Binocolo
+* Scarpe comode
+* Borraggia
+* Soldi contanti" required>{% if modify %} {{ itinerary['equipment_markdown'] }} {% endif %}</textarea>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="row custom-file" style="margin-left: 1px;">
+                <input type="file" class="custom-file-input" id="file" name="file" {% if not modify %} required {% endif %}>
+                <label class="custom-file-label" for="customFile" accept="image/*">Choose file</label>
+              </div>
+              
+              <div class="row md-3 mt-3 justify-content-md-center">
+                <img {% if modify %} {{ itinerary['equipment_markdown'] }} src="{{ itinerary['image'] }}" {% else %} src="https://placehold.it/840x600" {% endif %} id="preview" class="img-thumbnail">
+              </div>
+              
+              {% if modify %} 
+                <input type="text" class="custom-file-input" id="modify" name="modify" value="true" hidden>
+              {% endif %}
+
+              <div class="row md-3 mt-3 justify-content-md-center">
+                <button type="submit" name="confirm_itinerary" id="confirm_itinerary" class="btn btn-secondary btn-lg text-white border-light rounded-lg">Conferma</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+    {% include 'footer.html' %}
+    {% include 'script.html' %}
+  </body>
+</html>

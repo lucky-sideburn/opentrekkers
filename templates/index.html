@@ -1,0 +1,143 @@
+
+<!doctype html>
+<html lang="en">
+  {% include 'head.html' %}
+  <body>
+    {% if session['username'] %}
+    <div class="cover-container" style="background-image: url('{{site_url}}/static/images/cover_bg1.png'); background-size: cover;  background-position: center; background-repeat: no-repeat;"> 
+    {% else %}
+    <div class="cover-container"> 
+    {% endif %}
+      <header>
+        {% include 'navbar.html' %}
+      </header>
+    {% include 'modals.html' %}
+      {% if session['username'] and itinerary_id == '' %}
+      <!-- <div class="container" style="background-color: #278d8f;"> -->
+        {% if message %}
+        <div class="row justify-content-md-center justify-content-center">
+          <div class="alert alert-success mt-3 alert-custom center" style="width: 50%;" role="alert" id="alert_message">
+            {{ message }}
+            <button style="color: rgb(0, 0, 0);" type="button btn-light" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+        {% endif %}
+        <div class="row row-margin-40 justify-content-md-center" style="margin-left: 3%; margin-right: 3%;">
+            <main role="main" class="inner cover" style="margin-left: 3%; margin-right: 3%;">
+              <div class="row">
+                <h1 style="line-height: 100%; color: #ede5e5;">Benvenuto in Opentrekkers.it</h1>
+              </div>
+              <div class="row">
+                <h3 style="line-height: 100%; color: #ede5e5;" class="mt-3">La Community Open degli itinerari di prossimità</h3>
+              </div>
+              <!-- <img src="{{site_url}}/static/images/logos/logo1.png" class="img-fluid row-margin-20" width="100" height="100"> -->
+              <form action="{{ site_url}}/search/itinerary" method="POST" id="search_form" class="search_form">
+                <div class="form-group row-margin-20 justify-content-center" style="margin-left: 5%; margin-right: 5%;">
+                  <input name="search_text" type="text" class="form-control form-control-lg border-light" id="search_text" placeholder="passeggiata Roma">
+                  <div class="row row-margin-20 justify-content-center">
+                    <button type="submit" class="search_button btn btn-secondary btn-lg text-white border-light rounded-lg">Cerca</button>
+                  </div>
+
+                  <!-- <div class="row justify-content-md-center text-center justify-content-center mt-3"> 
+                    <a href="#" style="color: #ede5e5;" id="hide_search"><u>Nascondi barra di ricerca</u></a>
+                  </div> -->
+
+                </div>
+              </form>        
+            </main>
+        </div>
+      <!-- </div> -->
+      {% endif %}
+    </div>
+      {% if not session['username'] %}
+      <div class="row justify-content-md-center justify-content-center row-margin-40">
+        <h2 style="color: #6f6f6f;" class="row-margin-40"">Coming soon</h2>
+      </div>
+      {% endif %}
+
+      {% if session['username'] %}
+        {% if itinerary_id == '' %}
+      <div class="row justify-content-md-center" style="margin-left: 1%; margin-right: 1%;"> 
+        <h4 style="color: #6f6f6f; margin-left: 3%; margin-right: 3%;" class="mt-3">Scegli uno dei nostri itinerari e ottieni uno sconto per una guide turistiche e ristoranti.</h4>
+      </div>
+      <!-- <div class="row justify-content-md-center text-center justify-content-center"> 
+        <a id="show_search" href="#" style="color: #ede5e5;"><u>Usa barra di ricerca</u></a>
+      </div> -->
+        {% endif %}
+      {% endif %}
+      {% if session['username'] %}
+      <div class="album py-5">
+        <div class="container">
+          <div class="row">
+            {% for itinerary in itineraries %}
+              {% if itinerary['status'] == 'enabled' and itinerary_id == '' %}
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow border-light border-0" style="background-color: #f9f7f79b;">
+                <img class="card-img-top" src="{{ itinerary['image'] }}" alt="{{ itinerary['name'] }}">
+                <div class="card-body">
+                  <div class="row text-center justify-content-center">
+                    <p class="text-center"><strong>{{ itinerary['name'] }}</strong></p>
+                  </div>
+                  {% if itinerary['vouchers'] > 0 %}
+                  <div class="row">
+                    <div class="col text-left">
+                      <p><small>Voucher</small></p>
+                    </div>
+                    <div class="col text-right col-2">
+                      <p><small>{{ itinerary['vouchers'] }}&nbsp;</small></p>
+                    </div>
+                  </div>
+                  {% endif %}
+                  <div class="row">
+                    <div class="col text-left">
+                      <p><small>Durata</small></p>
+                    </div>
+                    <div class="col text-right">
+                      <p><small>{{ itinerary['duration'] }} ore</small></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col text-left">
+                      <p><small>Livello</small></p>
+                    </div>
+                    <div class="col text-right">
+                      <p><small>{{ itinerary['level'] }}</small></p>
+                    </div>
+                  </div>                 
+                  <div class="row mt-3 text-left">
+                    <div class="container">
+                      <p>{{ itinerary['short_description'] }}</p>
+                    </div>
+                  </div>
+                  <div class="row justify-content-center mt-3">
+                    <div class="col text-left">
+                      {% if itinerary['vouchers'] == 0 %}
+                      <a class="search_button btn btn-secondary btn-sm text-white border-light rounded-lg" href="{{ site_url }}/show_itinerary?id={{ itinerary['itinerary_id'] }}" role="button">Apri</a>
+                      {% else %}
+                      <a class="search_button btn btn-secondary btn-sm text-white border-light rounded-lg" href="{{ site_url }}/show_itinerary?id={{ itinerary['itinerary_id'] }}" role="button">Apri</a>
+                      {% endif %}
+                    </div>
+                    <div class="col text-right">
+                      <img src="{{ site_url }}/static/images/icons/google_maps.png" width="50" height="50" class="img-thumbnail" id="google_maps_link" name="{{ itinerary['google_maps'] }}">
+                    </div>
+                  </div>
+                  {% if itinerary['vouchers'] == 0 %}
+                  <div class="row mt-3 text-center justify-content-center">
+                    <a class="suggest_voucher" id="suggest_voucher_{{itinerary['name']}}" href="#" style="color: #3e9ec4;"><u>Proponi un voucher</u></a>          
+                  </div>
+                  {% endif %} 
+                </div>
+              </div>
+            </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    {% include 'footer.html' %}
+    {% include 'script.html' %}
+  </body>
+</html>
